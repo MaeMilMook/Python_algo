@@ -8,6 +8,7 @@ Created on 2014. 9. 6.
 
 '''
 
+#Fail, 문제 인식 실패
 def __turn90Matrix(matrix):
     
     for ridx, row in enumerate(matrix):
@@ -18,19 +19,41 @@ def __turn90Matrix(matrix):
     
 
 
+def __turn90MatrixBylayer(matrix):
+    
+    mtxLen = len(matrix)
 
+    for i in range(mtxLen//2):
+        
+        p = mtxLen - i - 1
+            
+        for j in range(0, p - i):
+            
+            tmp = matrix[i][j + i]
+            
+            matrix[i][j + i] = matrix[p - j][i]
+            
+            matrix[p - j][i] = matrix[p][p - j]
+            
+            matrix[p][p - j] = matrix[j + i][p]
+            
+            matrix[j + i][p] = tmp
+            
 
 if __name__ == '__main__':
     
     n = 4
     
-    matrix = [[col for col in range(n)] for row in range(n)]
+    #matrix = [[col for col in range(n)] for row in range(n)]
+    #matrix = [[7, 9, 9, 2], [3, 9, 4, 9], [6, 0, 1, 2], [8, 4, 5, 2]]
+    matrix = [[7, 9, 2], [3, 9, 4], [6, 0, 1]]
+    #matrix = [[7, 9], [3, 4]]
 
     for row in matrix:
         print(row)
         
     
-    __turn90Matrix(matrix)
+    __turn90MatrixBylayer(matrix)
     
     print('==>')
     
